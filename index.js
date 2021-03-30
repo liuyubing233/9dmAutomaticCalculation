@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         9dm每日计算自动填入
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      2.0.0
 // @description  9dm每日计算验证自动填入, com重定向到net, 可以直接跳转到旧的收藏页面了
 // @author       super puffer fish
 // @match        *://www.9dmdamaomod.com/*
@@ -11,8 +11,8 @@
 
 (function () {
   'use strict'
-  const { search, protocol } = window.location
-  if (window.location.pathname === '/gonggao/') {
+  const { search, protocol, pathname } = window.location
+  if (/\/gonggao\//.test(pathname)) {
     // 如果pathname为/gonggao/则为com到net重定向地址
     window.open(protocol + '//www.9dmdamaomod.net' + search ? '/forum.php' + search : '', '_self')
   }
