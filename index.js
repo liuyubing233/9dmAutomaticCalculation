@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         9dm每日计算自动填入
 // @namespace    http://tampermonkey.net/
-// @version      2.0.0
+// @version      2.1.0
 // @description  9dm每日计算验证自动填入, com重定向到net, 可以直接跳转到旧的收藏页面了
 // @author       super puffer fish
 // @match        *://www.9dmdamaomod.com/*
 // @match        *://www.9dmdamaomod.net/*
+// @match        *://www.9damaogame.net/*
 // @grant        none
 // ==/UserScript==
 
