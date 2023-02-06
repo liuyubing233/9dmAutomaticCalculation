@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         9dm每日计算自动填入
 // @namespace    http://tampermonkey.net/
-// @version      2.2.0
+// @version      2.3.0
 // @description  9dm每日计算验证自动填入；旧的收藏页面域名com重定向到新的net；搜索计算自动验证
 // @author       liuyubing
 // @match        *://www.9dmdamaomod.com/*
@@ -32,32 +32,5 @@
   }, 100);
 
   // 搜索计算自动验证
-  setTimeout(() => {
-    const nodeNum1 = document.getElementById("num1");
-    if (!nodeNum1) return;
-    const nodeNumAll = nodeNum1.parentNode.querySelectorAll("span");
-    let sum = 0;
-    nodeNumAll.forEach((item) => {
-      if (item.id.includes("num")) {
-        sum += +item.innerText ? +item.innerText : 0;
-      }
-    });
-    const nodeInput = document.querySelector(".v-code input");
-    nodeInput.value = sum;
-
-    var event = document.createEvent("Event");
-    // TODO: 后续此方法废弃后需要修改
-    event.initEvent("keydown", true, false);
-    event = Object.assign(event, {
-      ctrlKey: false,
-      metaKey: false,
-      altKey: false,
-      which: 13,
-      keyCode: 13,
-      key: "Enter",
-      code: "Enter",
-    });
-    nodeInput.focus();
-    nodeInput.dispatchEvent(event);
-  }, 100);
+  document.querySelector('.mask').style.display = 'none';
 })();
