@@ -1,23 +1,33 @@
 // ==UserScript==
 // @name         9dm每日计算自动填入
 // @namespace    http://tampermonkey.net/
-// @version      2.3.1
-// @description  9dm每日计算验证自动填入；旧的收藏页面域名com重定向到新的net；搜索计算自动验证
+// @version      2.4.0
+// @description  9dm每日计算验证自动填入；旧的收藏页面地址重定向到新地址；搜索计算自动验证
 // @author       liuyubing
 // @match        *://www.9dmdamaomod.com/*
 // @match        *://www.9dmdamaomod.net/*
 // @match        *://www.9damaogame.net/*
 // @match        *://www.9damaogames.com/*
 // @grant        none
+// @run-at       document-start
 // ==/UserScript==
 
 (function () {
   "use strict";
-  const { search, protocol, pathname } = window.location;
-  if (/\/gonggao\//.test(pathname)) {
+  /** 当前使用的 host */
+  const CURRENT_HOST = "www.9damaogames.com";
+
+  const { search, protocol, pathname, host, href } = window.location;
+
+  const nHref = protocol + "//" + CURRENT_HOST + (search ? "/forum.php" + search : "");
+
+  if (/\/gonggao\//.test(pathname) || host !== CURRENT_HOST) {
     // 如果pathname为/gonggao/则为com到net重定向地址
-    window.open(protocol + "//www.9damaogames.com" + search ? "/forum.php" + search : "", "_self");
+    // 如果当前 host 跟预设 host 不同则重定向
+    window.open(nHref, "_self");
+    return;
   }
+
 
   // 每日计算自动填入
   setTimeout(() => {
@@ -33,5 +43,6 @@
   }, 100);
 
   // 搜索计算自动验证
-  document.querySelector('.mask').style.display = 'none';
+  const domSearchMask = document.querySelector(".mask");
+  domSearchMask && (domSearchMask.style.display = "none");
 })();
