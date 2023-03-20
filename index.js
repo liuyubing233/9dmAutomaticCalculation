@@ -17,17 +17,14 @@
   /** 当前使用的 host */
   const CURRENT_HOST = "www.9damaogames.com";
 
-  const { search, protocol, pathname, host, href } = window.location;
-
-  const nHref = protocol + "//" + CURRENT_HOST + (search ? "/forum.php" + search : "");
-
+  const { search, protocol, pathname, host } = window.location;
   if (/\/gonggao\//.test(pathname) || host !== CURRENT_HOST) {
     // 如果pathname为/gonggao/则为com到net重定向地址
     // 如果当前 host 跟预设 host 不同则重定向
+    const nHref = protocol + "//" + CURRENT_HOST + (search ? "/forum.php" + search : "");
     window.open(nHref, "_self");
     return;
   }
-
 
   // 每日计算自动填入
   setTimeout(() => {
