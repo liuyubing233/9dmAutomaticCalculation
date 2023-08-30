@@ -1,13 +1,14 @@
 // ==UserScript==
 // @name         9dm每日计算自动填入
 // @namespace    http://tampermonkey.net/
-// @version      2.4.1
+// @version      2.4.2
 // @description  9dm每日计算验证自动填入；旧的收藏页面地址重定向到新地址；搜索计算自动验证
 // @author       liuyubing
 // @match        *://www.9dmdamaomod.com/*
 // @match        *://www.9dmdamaomod.net/*
 // @match        *://www.9damaogame.net/*
 // @match        *://www.9damaogames.com/*
+// @match        *://www.9dmsgame.com/*
 // @grant        none
 // @run-at       document-start
 // ==/UserScript==
@@ -15,7 +16,7 @@
 (function () {
   "use strict";
   /** 当前使用的 host */
-  const CURRENT_HOST = "www.9damaogames.com";
+  const CURRENT_HOST = "www.9dmsgame.com";
 
   const { search, protocol, pathname, host } = window.location;
   if (/\/gonggao\//.test(pathname) || host !== CURRENT_HOST) {
